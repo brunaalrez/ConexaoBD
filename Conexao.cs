@@ -8,6 +8,19 @@ namespace ConexaoBD{
     class Conexao{
         string dadosConexao = "server=localhost;user=root;database=teste_ti42;port=3306;password=";
 
+        public int ExecutaComando(string query)
+        {
+            //Criar e abre con~exão
+            MySqlConnection conexao = new MySqlConnection(dadosConexao);
+            conexao.Open();
+
+            //rodar a query 
+            MySqlCommand comando = new MySqlCommand(query, conexao);
+            int linhasAfetadas = comando.ExecuteNonQuery();
+            conexao.Close();
+            return linhasAfetadas;
+        }
+
         public DataTable ExecutaSelect(string query)
         {
             //Criar e abre con~exão
